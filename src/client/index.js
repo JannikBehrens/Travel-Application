@@ -1,8 +1,8 @@
 
 import { handleSubmit } from './js/formHandler'
-import { checkText } from './js/formHandler'
-import { getKey } from './js/formHandler'
+
 import { validateUrl } from './js/nameChecker'
+import {postData} from './js/formHandler'
 
 import './styles/resets.scss'
 import './styles/base.scss'
@@ -14,7 +14,7 @@ import './styles/header.scss'
 export {
     
     handleSubmit, 
-    checkText,    
-    getKey,
-    validateUrl
+   
+    validateUrl,
+    postData
 }

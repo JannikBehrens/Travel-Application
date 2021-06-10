@@ -1,15 +1,15 @@
 function handleSubmit(e) {
     e.preventDefault()
     
-    const apiUrl = "https://api.meaningcloud.com/sentiment-2.1?key="
+    //const apiUrl = "https://api.meaningcloud.com/sentiment-2.1?key="
     // check what text was put into the form field
     const inputUrl = document.getElementById('name').value
     if (Client.validateUrl(inputUrl)) {
-    Client.getKey()
-    .then(function(key){
+    //Client.getKey()
+    //.then(function(key){
         
-    Client.checkText(apiUrl, key.key, inputUrl)
-    
+    //Client.checkText(apiUrl, key.key, inputUrl)
+    postData('http://localhost:8081/serverapi', {userUrl : inputUrl})
     .then(function(data){
         const confidence = data.confidence;
         console.log("Confidence: ",confidence)
@@ -48,7 +48,7 @@ function handleSubmit(e) {
         document.getElementById('score').innerHTML=`Polarity Score: ${score}`;
         
         
-        })})
+        })
     } else {
         console.log('Please use a valid url');
         alert('Please use a valid url')
@@ -58,22 +58,42 @@ function handleSubmit(e) {
 
     
     /* Function to GET  API Data*/
-    const checkText = async (apiUrl, apiKey, inputUrl) => {
+    //const checkText = async (apiUrl, apiKey, inputUrl) => {
         
         // fetch api
-        const response = await fetch(`${apiUrl}${apiKey}&lang=auto&url=${inputUrl}`)
+    //    const response = await fetch(`${apiUrl}${apiKey}&lang=auto&url=${inputUrl}`)
         //console.log("Response in checkText: ",response)
-        try {
-            const textData = await response.json();
+    //    try {
+    //        const textData = await response.json();
             
-            return textData;
-        } catch(error){
-            console.log('Error in checkText: ', error);
-     }
-    }
-    
-    const getKey = async () => {
-        const request = await fetch('http://localhost:8081/all',
+     //       return textData;
+     //   } catch(error){
+          //  console.log('Error in checkText: ', error);
+    // }
+    //}
+    const postData = async (url ="", data= {}) =>{
+        console.log("Data in postData: ",data);
+        const respone = await fetch(url, {
+            method: 'POST',
+            credentials: 'same-origin',
+            mode: 'cors',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body : JSON.stringify(data)
+        });
+        try {
+            const newData = await respone.json();
+            console.log('Data received in post Data try: ', newData);
+            return newData
+        } catch (error){
+            console.log('Error in post Data: ', error)
+        }
+    };
+
+
+    //const getKey = async () => {
+     //   const request = await fetch('http://localhost:8081/all',
     //{
      //   mode: "no-cors",
     //    headers: {
@@ -81,18 +101,18 @@ function handleSubmit(e) {
      //       "Access-Control-Allow-Origin": "*"
     //    },        
     //}
-    );
+   // );
         //console.log(request)
-        try {
-            const apiKey = await request.json();
-            //console.log(apiKey)
-            return apiKey
-        } catch(error){
-            console.log('Error in getKey: ', error)
-            }}
+    //    try {
+    //        const apiKey = await request.json();
+    //        //console.log(apiKey)
+     //       return apiKey
+     //   } catch(error){
+           // console.log('Error in getKey: ', error)
+     //       }}
 
    
 export { handleSubmit }
-export { checkText }
-export { getKey }
+
+export { postData }
 
