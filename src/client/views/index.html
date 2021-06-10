@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+    <!--<link rel="stylesheet" href="/styles/resets.scss" />
+    <link rel="stylesheet" href="/styles/base.scss" />
+    <link rel="stylesheet" href="/styles/header.scss" />
+    <link rel="stylesheet" href="/styles/form.scss" />
+    <link rel="stylesheet" href="/styles/footer.scss" />-->
+  </head>
+
+  <body>
+    <header>
+      <div class="title">Natural Language Processing App</div>
+    </header>
+
+    <main>
+      <section>
+        <form class="form" onsubmit="return Client.handleSubmit(event)">
+          <input
+            id="name"
+            type="text"
+            name="input"
+            value=""
+            placeholder="Input URL you want to check with NLP"
+          />
+          <input
+            type="submit"
+            name=""
+            value="Submit"
+            onclick="return Client.handleSubmit(event)"
+            onsubmit="return Client.handleSubmit(event)"
+          />
+        </form>
+      </section>
+
+      <section id="results">
+        <strong>NLP Results:</strong>
+        <div id="result"></div>
+        <div id="objectivity"></div>
+        <div id="score"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Project by Udacity & Jannik</p>
+    </footer>
+    <script>
+      // Check that service workers are supported
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/service-worker.js");
+        });
+      }
+    </script>
+  </body>
+</html>
