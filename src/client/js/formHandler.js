@@ -10,6 +10,11 @@ export const handleSubmit = async e => {
     console.log(tripStart);
     const tripEnd = document.querySelector("#tripend").value;
     console.log(tripEnd);
+
+    // Introdice data objects for API calls
+    let location = {};
+    let weather = {}
+    let locPic = {}
     
     // Date Calculations
     const startDate = new Date(tripStart);
@@ -29,12 +34,8 @@ export const handleSubmit = async e => {
         return;
     }
 
-    // Introdice data objects for API calls
-    let location = {};
-    let weatherData = {}
-    let locPic = {}
-
-    
+  
+        // --------------Get the coordinates of destination----------------------
         const geoApiCall = await fetch('http://localhost:8095/geoApi', {
             method: 'POST',
             credentials: 'same-origin',
@@ -58,9 +59,11 @@ export const handleSubmit = async e => {
         } catch (error) {
             console.error("Error in geoAPICall", error);
         } 
+        //---------------------------------------------------------
      //location is a object with the four keys city / country / lat / long
-    console.log("Updated location: ",location)
+    console.log("Updated location Object: ",location)
 
+    // --------------Get Weather forecast for destination------------
     const weatherApiCall = await fetch('http://localhost:8095/weatherApi', {
         method: 'POST',
         credentials: 'same-origin',
@@ -72,11 +75,35 @@ export const handleSubmit = async e => {
         body: JSON.stringify( location ),
     });
     try {
-		const WeatherResponse = await weatherApiCall.json();
-		console.log('Weather from Weatherbit: ', WeatherResponse);
+		const weatherData = await weatherApiCall.json();
+		weather = weatherData;
+        console.log('Updated weather Object: ', weather)
 	} catch (error) {
 		console.error("Error in weatherApiCall: ",error);
 	}
+
+    const c = location.city;
+    console.log(c)
+    //-----------------------------------------------------
+    // ---------------Get Picture of destination--------------------------
+    const pictureApiCall = await fetch('http://localhost:8095/pictureApi', {
+        method: 'POST',
+        credentials: 'same-origin',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        
+        body: JSON.stringify( c ),
+    });
+    try {
+		const pixaData = await pictureApiCall.json();
+		
+        console.log('PixaData: ', pixaData)
+	} catch (error) {
+		console.error("Error in pictureApiCall: ",error);
+	}
+
 }
 
 

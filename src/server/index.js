@@ -8,6 +8,7 @@ const fetch = require('node-fetch');
 const mockAPIResponse = require('./mockAPI.js')
 const cors = require('cors');
 const { request, response } = require('express');
+const { POINT_CONVERSION_COMPRESSED } = require('constants');
 
 
 //declare API credentials
@@ -17,7 +18,9 @@ const GeoApiUrl = 'http://api.geonames.org/searchJSON?q';
 // Weatherbit
 const weatherKey = {key: process.env.WEATHER_KEY}
 const weatherApiUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
-
+// Pixabay
+const pixaKey = { key : process.env.PIXABAY_KEY};
+const pixaApiUrl = 'https://pixabay.com/api/?key=';
 
 
 
@@ -89,7 +92,7 @@ app.post('/weatherApi', async function(request, response){
     const lon = request.body.lon;
     console.log('lat: ', lat)
     console.log('lon: ', lon)
-    const url = `${weatherApiUrl}&lat=${lat}&lon=${lon}&days=3&key=${weatherKey.key}`
+    const url = `${weatherApiUrl}&lat=${lat}&lon=${lon}&days=16&key=${weatherKey.key}`
     console.log(url)
     const fetchWeatherApi = await fetch (url)
     const weather = await fetchWeatherApi.json();
@@ -97,5 +100,21 @@ app.post('/weatherApi', async function(request, response){
     response.send(weather)
     } catch(error){
         console.log("Error in /weatherApi: ",error)
+    }
+})
+
+// Pixabay API Call
+app.post('/pictureApi', async function(request, response){
+    console.log('Getting Pixa Data for: ', request.body.city)
+    try {
+    const destination = encodeURI(request.body.dest_key)
+    const url = `${pixaApiUrl}key${pixaKey.key}&q=${destination}&image_type=photo&order=popular&page=1&per_page=3`;
+    const fetchPixaApi = await fetch(url);
+    console.log("fetch Pixa API: ",fetchPixaApi)
+    const pixa = await fetchPixaApi.json();
+    console.log("Pixa: ",pixa)
+    response.send(pixa);
+    } catch(error){
+        console.log("Error in /pictureApi: ", error)
     }
 })
