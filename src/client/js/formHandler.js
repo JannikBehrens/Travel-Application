@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import {updateUI} from "./updateUI"
 
 export const handleSubmit = async e => {
     e.preventDefault()
@@ -13,14 +14,16 @@ export const handleSubmit = async e => {
 
     // Introdice data objects for API calls
     let location = {};
-    let weather = {}
+    let weatherForecast = {}
+    let weatherCurrent = {}
     let locPic = {}
     
     // Date Calculations
     const startDate = new Date(tripStart);
     const endDate = new Date(tripEnd);
     const today = new Date()
-    
+    const stay = Math.round((endDate.getTime()-startDate.getTime()) / (1000 * 3600 * 24))
+    console.log("Stay: ", stay)
     const daysToStart = Math.round((startDate.getTime() - today.getTime()) / (1000 * 3600 * 24));
     console.log("Time to start: ", daysToStart)
 
@@ -84,15 +87,15 @@ export const handleSubmit = async e => {
     });
     try {
 		const weatherData = await weatherApiCall.json();
-		weather = weatherData;
-        console.log('Updated weather Object: ', weather)
+		weatherForecast = weatherData[0];
+        weatherCurrent = weatherData[1];
+        console.log('Updated weatherforecast Object: ', weatherForecast)
+        console.log('Updated weatherCurrent Object: ', weatherCurrent)
 	} catch (error) {
 		console.error("Error in weatherApiCall: ",error);
-	}
-
-    
+	}    
     //-----------------------------------------------------
-
+    updateUI(location, weather, locPic, destination, tripStart, daysToStart, stay)
   
 	}
 

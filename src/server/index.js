@@ -17,7 +17,8 @@ const geoUsername = {username: process.env.GEO_USERNAME};
 const GeoApiUrl = 'http://api.geonames.org/searchJSON?q';
 // Weatherbit
 const weatherKey = {key: process.env.WEATHER_KEY}
-const weatherApiUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
+const weatherForecastApiUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
+const weatherCurrentApiUrl = "https://api.weatherbit.io/v2.0/current?"
 // Pixabay
 const pixaKey = { key : process.env.PIXABAY_KEY};
 const pixaApiUrl = 'https://pixabay.com/api/?key=';
@@ -92,12 +93,17 @@ app.post('/weatherApi', async function(request, response){
     const lon = request.body.lon;
     console.log('lat: ', lat)
     console.log('lon: ', lon)
-    const url = `${weatherApiUrl}&lat=${lat}&lon=${lon}&days=16&key=${weatherKey.key}`
-    console.log(url)
-    const fetchWeatherApi = await fetch (url)
-    const weather = await fetchWeatherApi.json();
-    console.log(weather)
-    response.send(weather)
+    const forecastUrl = `${weatherForecastApiUrl}&lat=${lat}&lon=${lon}&days=16&key=${weatherKey.key}`
+    const currentUrl = `${weatherCurrentApiUrl}&lat=${lat}&lon=${lon}&key=${weatherKey.key}`
+    console.log("Forcast URL: ",forecastUrl)
+    console.log("Curren URL: ",currentUrl)
+    const fetchForecastApi = await fetch (forecastUrl)
+    const fetchcurrentApi = await fetch (currentUrl)
+    const forecast = await fetchForecastApi.json();
+    const current = await fetchcurrentApi.json();
+    console.log("Forecast: ",forecast);
+    console.log("Current : ", current)
+    response.send([forecast, current])
     } catch(error){
         console.log("Error in /weatherApi: ",error)
     }

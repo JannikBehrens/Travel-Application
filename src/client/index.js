@@ -1,6 +1,6 @@
 
 import { handleSubmit } from './js/formHandler'
-
+import { updateUI } from './js/updateUI'
 import { validateUrl } from './js/nameChecker'
 import {postData} from './js/formHandler'
 
@@ -14,7 +14,7 @@ import './styles/header.scss'
 export {
     
     handleSubmit, 
-    
+    updateUI,
     validateUrl,
     
 }
