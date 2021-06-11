@@ -103,12 +103,12 @@ app.post('/weatherApi', async function(request, response){
     }
 })
 
-// Pixabay API Call
+// Pixabay API Call - Producing Cors Error
 app.post('/pictureApi', async function(request, response){
     console.log('Getting Pixa Data for: ', request.body.city)
     try {
     const destination = encodeURI(request.body.dest_key)
-    const url = `${pixaApiUrl}key${pixaKey.key}&q=${destination}&image_type=photo&order=popular&page=1&per_page=3`;
+    const url = `${pixaApiUrl}${pixaKey.key}&q=${destination}&image_type=photo&order=popular&page=1&per_page=3`;
     const fetchPixaApi = await fetch(url);
     console.log("fetch Pixa API: ",fetchPixaApi)
     const pixa = await fetchPixaApi.json();
@@ -116,5 +116,25 @@ app.post('/pictureApi', async function(request, response){
     response.send(pixa);
     } catch(error){
         console.log("Error in /pictureApi: ", error)
+    }
+})
+
+
+// Geonames API Call
+app.post('/doubleApi', async function(request, response){
+    //console.log('Getting Geo Data for: ', request.body.dest_key)
+    try {
+    const destination = encodeURI(request.body.dest_key)
+    const url = `${GeoApiUrl}=${destination}&maxRows=1&username=${geoUsername.username}`;
+    const pixUrl = `${pixaApiUrl}${pixaKey.key}&q=${destination}&image_type=photo&order=popular&page=1&per_page=3`;
+    const fetchGeoApi = await fetch(url);
+    const fetchPixaApi = await fetch(pixUrl);
+    //console.log("fetch Geo API: ",fetchGeoApi)
+    const location = await fetchGeoApi.json();
+    const pixa = await fetchPixaApi.json();
+    //console.log("Location: ",location)
+    response.send([location,pixa]);
+    } catch(error){
+        console.log("Error in /doubleApi: ", error)
     }
 })
