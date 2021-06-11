@@ -14,7 +14,7 @@ import './styles/header.scss'
 export {
     
     handleSubmit, 
-   
+    
     validateUrl,
-    postData
+    
 }

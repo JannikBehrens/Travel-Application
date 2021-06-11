@@ -12,18 +12,32 @@
 
   <body>
     <header>
-      <div class="title">Natural Language Processing App</div>
+      <div class="title">Travel App</div>
     </header>
 
     <main>
       <section>
         <form class="form" onsubmit="return Client.handleSubmit(event)">
           <input
-            id="name"
+            id="start"
+            type="date"
+            name="start"
+            value="2021-08-08"
+            placeholder="Input Location"
+          />
+          <input
+            id="tripend"
+            type="date"
+            name="end"
+            value="2021-08-10"
+            placeholder="Input Location"
+          />
+          <input
+            id="destination"
             type="text"
             name="input"
-            value=""
-            placeholder="Input URL you want to check with NLP"
+            value="Hamburg"
+            placeholder="Input Location"
           />
           <input
             type="submit"
@@ -36,7 +50,7 @@
       </section>
 
       <section id="results">
-        <strong>NLP Results:</strong>
+        <strong>Output</strong>
         <div id="result"></div>
         <div id="objectivity"></div>
         <div id="score"></div>

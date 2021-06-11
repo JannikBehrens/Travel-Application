@@ -6,15 +6,22 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch');
 const mockAPIResponse = require('./mockAPI.js')
+const cors = require('cors');
+const { request, response } = require('express');
+
 
 //declare API credentials
-const apiKey = {key: process.env.API_KEY};
-const url = "https://api.meaningcloud.com/sentiment-2.1?key=";
-const cors = require('cors');
+// GeoNames
+const geoUsername = {username: process.env.GEO_USERNAME};
+const GeoApiUrl = 'http://api.geonames.org/searchJSON?q';
+// Weatherbit
+const weatherKey = {key: process.env.WEATHER_KEY}
+const weatherApiUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?'
+
+
 
 
 const app = express()
-
 app.use(express.static('dist'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
@@ -28,8 +35,8 @@ app.get('/', function (req, res) {
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(8081, function () {
-    console.log('Example app listening on port 8081!')
+app.listen(8095, function () {
+    console.log('Example app listening on port 8095!')
 })
 
 app.get('/all', (request, response) => {
@@ -57,4 +64,38 @@ app.post('/serverapi', async function(req,res){
     const data = await respone.json()
     //console.log('MeaningCloud data :', data);
     res.send(data)
+})
+
+// Geonames API Call
+app.post('/geoApi', async function(request, response){
+    //console.log('Getting Geo Data for: ', request.body.dest_key)
+    try {
+    const destination = encodeURI(request.body.dest_key)
+    const url = `${GeoApiUrl}=${destination}&maxRows=1&username=${geoUsername.username}`;
+    const fetchGeoApi = await fetch(url);
+    //console.log("fetch Geo API: ",fetchGeoApi)
+    const location = await fetchGeoApi.json();
+    //console.log("Location: ",location)
+    response.send(location);
+    } catch(error){
+        console.log("Error in /geoApi: ", error)
+    }
+})
+
+// WeatherBit API Call
+app.post('/weatherApi', async function(request, response){
+    try {
+    const lat = request.body.lat;
+    const lon = request.body.lon;
+    console.log('lat: ', lat)
+    console.log('lon: ', lon)
+    const url = `${weatherApiUrl}&lat=${lat}&lon=${lon}&days=3&key=${weatherKey.key}`
+    console.log(url)
+    const fetchWeatherApi = await fetch (url)
+    const weather = await fetchWeatherApi.json();
+    console.log(weather)
+    response.send(weather)
+    } catch(error){
+        console.log("Error in /weatherApi: ",error)
+    }
 })
