@@ -1,7 +1,9 @@
 form {
   border: 1px solid #545454;
-  border-radius: 3px;
-  padding: 40px;
+  text-align: center;
+  border-radius: 20px;
+  padding: 0.5em;
+  margin: 0.5em;
   background: rgb(136, 203, 171);
   background: linear-gradient(
     0deg,
@@ -15,12 +17,4 @@ input {
   width: 100%;
   line-height: 16px;
   margin: 10px 0;
-}
-
-#results {
-  padding: 1em;
-}
-
-#results div {
-  padding: 0.4em;
 }

@@ -9,6 +9,8 @@ import './styles/base.scss'
 import './styles/footer.scss'
 import './styles/form.scss'
 import './styles/header.scss'
+import './styles/results.scss'
+
 
 // Export all js from index.js to the Client library
 export {

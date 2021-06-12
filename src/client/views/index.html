@@ -11,58 +11,68 @@
   </head>
 
   <body>
-    <header>
-      <div class="title">Travel App</div>
-    </header>
+    <div class="container">
+      <header>
+        <div class="title">Travel App - Plan your next trip</div>
+      </header>
 
-    <main>
-      <section>
-        <form class="form" onsubmit="return Client.handleSubmit(event)">
-          <input
-            id="destination"
-            type="text"
-            name="input"
-            value="Hamburg"
-            placeholder="Input Location"
-          />
-          <input
-            id="start"
-            type="date"
-            name="start"
-            value="2021-06-12"
-            placeholder="Input Location"
-          />
-          <input
-            id="tripend"
-            type="date"
-            name="end"
-            value="2021-08-10"
-            placeholder="Input Location"
-          />
-
-          <input
-            type="submit"
-            name=""
-            value="Submit"
-            onclick="return Client.handleSubmit(event)"
+      <main>
+        <section>
+          <form
+            id="form"
+            class="form"
             onsubmit="return Client.handleSubmit(event)"
-          />
-        </form>
-      </section>
+          >
+            <!--<label for="start" id="label">Plan your Trip</label>-->
+            <input
+              id="destination"
+              type="text"
+              name="input"
+              value="Hamburg"
+              placeholder="Input Location"
+            />
+            <input
+              id="start"
+              type="date"
+              name="start"
+              value="2021-06-13"
+              placeholder="Input Location"
+            />
+            <input
+              id="tripend"
+              type="date"
+              name="end"
+              value="2021-08-10"
+              placeholder="Input Location"
+            />
 
-      <section id="results">
-        <div id="picture"></div>
-        <div id="cityCountry"></div>
-        <div id="stay"></div>
-        <div id="weatherIcon"></div>
-        <div id="weatherCurrent"></div>
-        <div id="weatherForecast"></div>
-      </section>
-    </main>
+            <input
+              type="submit"
+              name=""
+              value="Submit"
+              onclick="return Client.handleSubmit(event)"
+              onsubmit="return Client.handleSubmit(event)"
+            />
+          </form>
+        </section>
 
-    <footer>
-      <p>Project by Jannik</p>
-    </footer>
+        <section id="results">
+          <div id="picture"></div>
+          <div id="content">
+            <div id="cityCountry"></div>
+            <div id="stay"></div>
+            <div id="weather">
+              <div id="weatherCurrent"></div>
+              <div id="weatherForecast"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>Project by Jannik</p>
+      </footer>
+    </div>
     <script>
       // Check that service workers are supported
       if ("serviceWorker" in navigator) {

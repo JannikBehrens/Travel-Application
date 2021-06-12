@@ -70,6 +70,7 @@ export const handleSubmit = async e => {
            
         } catch (error) {
             console.error("Error in geoAPICall", error);
+            alert('Sorry, did not find the destination.')
         } 
         //---------------------------------------------------------
      //location is an object with the four keys city / country / lat / long
@@ -98,6 +99,7 @@ export const handleSubmit = async e => {
 		console.error("Error in weatherApiCall: ",error);
 	}    
     //-----------------------------------------------------
+    
     updateUI(location, weatherForecast, weatherCurrent, locPic, destination, tripStart, daysToStart, stay)
   
 	}
