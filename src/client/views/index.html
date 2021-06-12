@@ -13,7 +13,9 @@
   <body>
     <div class="container">
       <header>
-        <div class="title">Travel App - Plan your next trip</div>
+        <div class="title">
+          <h1>Travel App</h1>
+        </div>
       </header>
 
       <main>
@@ -23,30 +25,33 @@
             class="form"
             onsubmit="return Client.handleSubmit(event)"
           >
-            <!--<label for="start" id="label">Plan your Trip</label>-->
+            <label for="input" id="label">Choose Destination</label>
             <input
               id="destination"
               type="text"
               name="input"
-              value="Hamburg"
+              value="New York City"
               placeholder="Input Location"
             />
+            <label for="start" id="label">When will you start?</label>
             <input
               id="start"
               type="date"
               name="start"
-              value="2021-06-13"
+              value="2021-06-14"
               placeholder="Input Location"
             />
+            <label for="end" id="label">When will you be back?</label>
             <input
               id="tripend"
               type="date"
               name="end"
-              value="2021-08-10"
+              value="2021-06-20"
               placeholder="Input Location"
             />
 
             <input
+              id="btn"
               type="submit"
               name=""
               value="Submit"

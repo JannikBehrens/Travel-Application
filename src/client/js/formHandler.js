@@ -15,13 +15,18 @@ export const handleSubmit = async e => {
     const today = new Date()
     const iso = today.toISOString()
     const isoCut = iso.substring(0, 10)
-    
+    if (destination === "" || tripStart === "" || tripEnd === ""){
+        alert('Please fill all three input fields')
+            throw new Error("At least one input fiels was empty");
+            return
+    }
     console.log("isoCut: ",isoCut)
     // Introdice data objects for API calls
     let location = {};
     let weatherForecast = {}
     let weatherCurrent = {}
     let locPic = {}
+    let locPicTwo = {}
     
     // Date Calculations
     
@@ -57,6 +62,7 @@ export const handleSubmit = async e => {
             const locationData = res[0]
             const pixa = res[1]
             locPic = pixa.hits[0].webformatURL
+            locPicTwo = pixa.hits[1].webformatURL
             console.log(locationData)
             console.log("Pixa response: ",pixa)
             location = {
@@ -70,7 +76,7 @@ export const handleSubmit = async e => {
            
         } catch (error) {
             console.error("Error in geoAPICall", error);
-            alert('Sorry, did not find the destination.')
+            alert('Sorry, did not find the destination. Try to add the County and give it a second try!')
         } 
         //---------------------------------------------------------
      //location is an object with the four keys city / country / lat / long
@@ -100,7 +106,7 @@ export const handleSubmit = async e => {
 	}    
     //-----------------------------------------------------
     
-    updateUI(location, weatherForecast, weatherCurrent, locPic, destination, tripStart, daysToStart, stay)
+    updateUI(location, weatherForecast, weatherCurrent, locPic, destination, tripStart, daysToStart, stay, locPicTwo)
   
 	}
 

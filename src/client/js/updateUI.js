@@ -1,8 +1,9 @@
-function updateUI (location, weatherForecast, weatherCurrent, locPic, destination, tripStart, daysToStart, stay) {
+function updateUI (location, weatherForecast, weatherCurrent, locPic, destination, tripStart, daysToStart, stay, locPicTwo) {
     console.log("Location in updateUI: ", location)
     console.log("weather Forecast in updateUI: ", weatherForecast.data)
     console.log("weather Current in updateUI: ", weatherCurrent.data[0])
     console.log("Locpic in updateUI: ", locPic)
+    console.log("LocpicTwo in updateUI: ", locPicTwo)
     console.log("Stay: ",stay)
     // DOM
     // Empty the dynamic Part of the DOM in case of changed inputs
@@ -13,6 +14,18 @@ function updateUI (location, weatherForecast, weatherCurrent, locPic, destinatio
     document.getElementById('weatherForecast').innerHTML =''
     // Picture
     document.getElementById('picture').innerHTML = `<img src="${locPic}" alt="Picture of ${location.city},${location.country}"></img>`
+    
+    document.querySelector('img').addEventListener('click', (event) => {
+        event.preventDefault(event);
+        console.log('evenrunning')
+        const pic = document.getElementById('picture')
+        //if (pic.innerHTML === `<img src="${locPic}" alt="Picture of ${location.city},${location.country}"></img>`) {
+            pic.innerHTML = `<img src="${locPicTwo}" alt="Picture of ${location.city},${location.country}"></img>`
+        //} else {
+            //pic.innerHTML = `<img src="${locPic}" alt="Picture of ${location.city},${location.country}"></img>`
+        //}
+
+    })
     // Message
     if (daysToStart === 0){
         document.getElementById('cityCountry').innerHTML = `Hurry up, your trip to ${location.city}, ${location.country} starts in the next 24 hours!`

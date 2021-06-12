@@ -3,14 +3,17 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(0deg, rgb(99, 99, 99) 0%, rgb(47, 47, 48) 100%);
+  background: linear-gradient(
+    0deg,
+    rgb(68, 137, 228) 0%,
+    rgb(118, 189, 221) 100%
+  );
 }
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  max-width: 900px;
   min-height: 100vh;
   background: linear-gradient(
     0deg,
@@ -26,4 +29,36 @@ section {
   max-width: 800px;
   margin: 50px auto;
   font-size: 2em;
+}
+
+@media (min-width: 800px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(0deg, rgb(99, 99, 99) 0%, rgb(47, 47, 48) 100%);
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 900px;
+    min-height: 100vh;
+    background: linear-gradient(
+      0deg,
+      rgb(68, 137, 228) 0%,
+      rgb(118, 189, 221) 100%
+    );
+  }
+  main {
+    flex: 2;
+  }
+
+  section {
+    max-width: 800px;
+    margin: 50px auto;
+    font-size: 2em;
+  }
 }
