@@ -1,17 +1,24 @@
-# Evaluate a News Article with Natural Language Processing
+# Travel Application
 
-## Udacity Project Number 4
+## Udacity Capstone Project
 
-This web app takes as input a url to a website (news website, blog etc.) with the text that should be processed.
-The app will call the meaningcloud API and return the confidence in the evaluation, the subjectivitiy of the text and the polarity.
+This web app takes as input a destination, a start date and a end date. It returns (if found) a picture of the loaction based on the first result from a API Call to Pixabay. It also shows:
+
+- Current weather, if the start date is today.
+- current weather and weather on start day, if the trip is within a week.
+- weather on startday, if the trip is within the next 16 days(max of forecast).
+- latest forecast, if the trip is in more than 16 days.
+- Length of stay
+- Days to start day
 
 ## Key Components of this Project
 
 - Webserver
 - Express
 - Webpack as a build tool
-- API Call (meaningcloud)
+- 3 API Calls (weatherbit, geonames, pixabay)
 - Offline Functionality (workbox plugin)
+- DOM manipulation
 
 ## Key Commands
 
