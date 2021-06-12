@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import {updateUI} from "./updateUI"
 
+
 export const handleSubmit = async e => {
     e.preventDefault()
         
@@ -11,7 +12,11 @@ export const handleSubmit = async e => {
     console.log(tripStart);
     const tripEnd = document.querySelector("#tripend").value;
     console.log(tripEnd);
-
+    const today = new Date()
+    const iso = today.toISOString()
+    const isoCut = iso.substring(0, 10)
+    
+    console.log("isoCut: ",isoCut)
     // Introdice data objects for API calls
     let location = {};
     let weatherForecast = {}
@@ -19,26 +24,21 @@ export const handleSubmit = async e => {
     let locPic = {}
     
     // Date Calculations
+    
     const startDate = new Date(tripStart);
     
     const endDate = new Date(tripEnd);
-    const today = new Date()
+    //const today = new Date()
     const stay = Math.round((endDate.getTime()-startDate.getTime()) / (1000 * 3600 * 24))
     console.log("Stay: ", stay)
     const daysToStart = Math.round((startDate.getTime() - today.getTime()) / (1000 * 3600 * 24));
+    
     console.log("Time to start: ", daysToStart)
 
 
     // Check for logical startDate & endDate
-    if (daysToStart <= -1){
-        console.log("today: ",today)
-        console.log('Start: ',startDate)
-        alert('Date for start of your trip can not be in the past');
-        return;
-    } else if (endDate < startDate){
-        alert('Date for end of your trip can not be earlier than the start');
-        return;
-    }
+    checkDates(daysToStart, startDate, endDate)
+    
 
         
         // --------------Get the coordinates and picture of destination to ----------------------
@@ -104,7 +104,21 @@ export const handleSubmit = async e => {
   
 	}
 
-
+    
+    function checkDates(daysToStart, startDate, endDate) {
+        if (daysToStart <= -1){
+            alert('Date for start of your trip must be greater than today')
+            throw new Error("Date for start of your trip must be greater than today");  
+            return
+        } else if (endDate < startDate){
+            alert('Date for end of your trip can not be earlier than the start')
+            throw new Error("Date for end of your trip can not be earlier than the start");
+            return
+        } else {
+            return true
+        }
+    }
+    export{ checkDates }
 
 
 

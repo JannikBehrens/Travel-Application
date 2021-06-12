@@ -15,9 +15,9 @@ function updateUI (location, weatherForecast, weatherCurrent, locPic, destinatio
     document.getElementById('picture').innerHTML = `<img src="${locPic}" alt="Picture of ${location.city},${location.country}"></img>`
     // Message
     if (daysToStart === 0){
-        document.getElementById('cityCountry').innerHTML = `Hurry up, your trip to ${location.city}, ${location.country} starts today!`
+        document.getElementById('cityCountry').innerHTML = `Hurry up, your trip to ${location.city}, ${location.country} starts in the next 24 hours!`
     } else if (daysToStart === 1){
-        document.getElementById('cityCountry').innerHTML = `Start your engine, your trip to ${location.city}, ${location.country} starts tomorrow!`
+        document.getElementById('cityCountry').innerHTML = `Start your engine, your trip to ${location.city}, ${location.country} in the next 48 hours!`
     } else {
     document.getElementById('cityCountry').innerHTML = `In only ${daysToStart} days you'll be in ${location.city}, ${location.country}!`
     }
