@@ -18,12 +18,18 @@
     <main>
       <section>
         <form class="form" onsubmit="return Client.handleSubmit(event)">
-          <!--Referring to the mentor advice to limit the possible start date to 16 days ftom today https://knowledge.udacity.com/questions/495385-->
+          <input
+            id="destination"
+            type="text"
+            name="input"
+            value="Hamburg"
+            placeholder="Input Location"
+          />
           <input
             id="start"
             type="date"
             name="start"
-            value="2021-08-08"
+            value="2021-06-12"
             placeholder="Input Location"
           />
           <input
@@ -33,13 +39,7 @@
             value="2021-08-10"
             placeholder="Input Location"
           />
-          <input
-            id="destination"
-            type="text"
-            name="input"
-            value="Hamburg"
-            placeholder="Input Location"
-          />
+
           <input
             type="submit"
             name=""
@@ -55,7 +55,8 @@
         <div id="cityCountry"></div>
         <div id="stay"></div>
         <div id="weatherIcon"></div>
-        <div id="weather"></div>
+        <div id="weatherCurrent"></div>
+        <div id="weatherForecast"></div>
       </section>
     </main>
 

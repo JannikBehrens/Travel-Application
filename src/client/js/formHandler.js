@@ -20,6 +20,7 @@ export const handleSubmit = async e => {
     
     // Date Calculations
     const startDate = new Date(tripStart);
+    
     const endDate = new Date(tripEnd);
     const today = new Date()
     const stay = Math.round((endDate.getTime()-startDate.getTime()) / (1000 * 3600 * 24))
@@ -29,7 +30,9 @@ export const handleSubmit = async e => {
 
 
     // Check for logical startDate & endDate
-    if (today > startDate){
+    if (daysToStart <= -1){
+        console.log("today: ",today)
+        console.log('Start: ',startDate)
         alert('Date for start of your trip can not be in the past');
         return;
     } else if (endDate < startDate){
@@ -95,7 +98,7 @@ export const handleSubmit = async e => {
 		console.error("Error in weatherApiCall: ",error);
 	}    
     //-----------------------------------------------------
-    updateUI(location, weather, locPic, destination, tripStart, daysToStart, stay)
+    updateUI(location, weatherForecast, weatherCurrent, locPic, destination, tripStart, daysToStart, stay)
   
 	}
 
