@@ -19,6 +19,9 @@
 
   /*border-radius: 20px;*/
 }
+#picture img:hover {
+  cursor: pointer;
+}
 
 #weather {
   display: flex;
