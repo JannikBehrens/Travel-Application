@@ -132,7 +132,7 @@ app.post('/doubleApi', async function(request, response){
     try {
     const destination = encodeURI(request.body.dest_key)
     const url = `${GeoApiUrl}=${destination}&maxRows=1&username=${geoUsername.username}`;
-    const pixUrl = `${pixaApiUrl}${pixaKey.key}&q=${destination}&image_type=photo&order=popular&page=1&per_page=3`;
+    const pixUrl = `${pixaApiUrl}${pixaKey.key}&q=${destination}&category=places&image_type=photo&order=popular&page=1&per_page=3`;
     const fetchGeoApi = await fetch(url);
     const fetchPixaApi = await fetch(pixUrl);
     //console.log("fetch Geo API: ",fetchGeoApi)

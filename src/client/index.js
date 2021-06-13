@@ -11,7 +11,16 @@ import './styles/form.scss'
 import './styles/header.scss'
 import './styles/results.scss'
 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Hello from DOM Content Loaded Event Listener')
+    const button = document.getElementById('btn')
+    button.addEventListener('click', (e)=> {
+        e.preventDefault()
+        console.log('Hello from Button Event Listener')
+        handleSubmit(e);
 
+    })
+    });
 
 // Export all js from index.js to the Client library
 export {
