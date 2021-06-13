@@ -17,7 +17,7 @@ function updateUI (location, weatherForecast, weatherCurrent, locPic, destinatio
     
     document.querySelector('img').addEventListener('click', (event) => {
         event.preventDefault(event);
-        console.log('evenrunning')
+        console.log('eventrunning')
         const pic = document.getElementById('picture')
         //if (pic.innerHTML === `<img src="${locPic}" alt="Picture of ${location.city},${location.country}"></img>`) {
             pic.innerHTML = `<img src="${locPicTwo}" alt="Picture of ${location.city},${location.country}"></img>`
