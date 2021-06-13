@@ -1,9 +1,11 @@
 form {
   border: 1px solid #545454;
-  height: 650px;
+  height: 550px;
   border-radius: 20px;
   padding: 0.5em;
+
   margin: 0.5em;
+  margin-top: 0px;
   background: rgb(136, 203, 171);
   background: linear-gradient(
     0deg,
@@ -18,13 +20,13 @@ label {
 input {
   padding: 10px 20px;
   width: 100%;
-  line-height: 60px;
+  line-height: 50px;
   margin: 10px 0;
   font-size: 1em;
 }
 
 #btn {
-  padding: 1em;
+  padding: 1.5em;
   padding-top: 1em;
   margin-top: 1em;
 }
